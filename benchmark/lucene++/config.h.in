@@ -1,0 +1,1 @@
+#cmakedefine SIZEOF_WCHAR_T ${SIZEOF_WCHAR_T}
