@@ -1,9 +1,8 @@
 #include <cstdint>
 #include <iostream>
-#include <string>
 
 #include "levenshtein.h"
-#include "../utf8/utf8.h"
+#include "util.h"
 
 int main(int argc, char** argv) {
 	if (argc < 3) {
@@ -11,14 +10,12 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	std::string s(argv[1]);
-	std::string t(argv[2]);
-	std::vector<uint32_t> s2(utf8::distance(s.cbegin(), s.cend())), t2(utf8::distance(t.cbegin(), t.cend()));
+	std::cout << "Matching " << argv[1] << " and " << argv[2] << "; " << std::flush;
 
-	std::cout << "Matching " << s << " and " << t << std::endl;
+	// Convert input to UTF32 int-arrays
+	std::vector<uint32_t> s2, t2;
+	utf8to32(argv[1], s2);
+	utf8to32(argv[2], t2);
 
-	utf8::utf8to32(s.cbegin(), s.cend(), s2.data());
-	utf8::utf8to32(t.cbegin(), t.cend(), t2.data());
-
-	std::cout << levenshtein(s2, t2) << std::endl;
+	std::cout << "Levenshtein distance is " << levenshtein(s2, t2) << std::endl;
 }
