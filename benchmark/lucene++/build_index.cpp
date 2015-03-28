@@ -1,5 +1,6 @@
 /**
- * Build a (fuzzy) index with Lucene++ give an input file containing a value on each line
+ * Build a (fuzzy) index with Lucene++ given an input file containing a value
+ * on each line
  */
 
 #include <cstdlib>
