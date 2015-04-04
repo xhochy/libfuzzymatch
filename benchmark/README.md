@@ -35,7 +35,8 @@ These are all ideas for futher benchmarks:
    * [ ] ISO-8859-?
    * [ ] UTF-16
    * [ ] UTF-32
- * Size of the index
- * Index loading and storing
- * Different data sets
- * Query string with edit distance > 2
+ * [ ] Size of the index
+ * [ ] Index loading and storing
+ * [ ] Different data sets
+ * [ ] Query string with edit distance > 2
+ * [ ] Look at Memory usage, not only CPU
