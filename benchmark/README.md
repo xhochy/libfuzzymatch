@@ -34,7 +34,7 @@ These are all ideas for futher benchmarks:
    * [ ] ASCII
    * [ ] ISO-8859-?
    * [ ] UTF-16
-   * [ ] UIF-32
+   * [ ] UTF-32
  * Size of the index
  * Index loading and storing
  * Different data sets
