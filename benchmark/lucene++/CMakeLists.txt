@@ -37,3 +37,13 @@ set_target_properties(build_index
     PROPERTIES
     RUNTIME_OUTPUT_NAME build-index
     )
+
+# Query the index, the exciting stuff
+add_executable(query_index query_index.cpp)
+target_link_libraries(query_index ${LUCENEPP_LIBRARIES}
+    ${Boost_FILESYSTEM_LIBRARY}
+    ${Boost_SYSTEM_LIBRARY})
+set_target_properties(query_index
+    PROPERTIES
+    RUNTIME_OUTPUT_NAME query-index
+    )
