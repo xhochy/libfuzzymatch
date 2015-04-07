@@ -17,6 +17,12 @@
 #include "../../src/utf8/utf8.h"
 #include "config.h"
 
+double getCurrentTime() {
+    struct timeval timstr;
+    gettimeofday(&timstr, NULL);
+    return timstr.tv_sec + (timstr.tv_usec / 1000000.0);
+}
+
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         std::cerr << "You must specify exactly a single input filename." << std::endl;
@@ -29,6 +35,8 @@ int main(int argc, char *argv[]) {
     auto writer = Lucene::newLucene<Lucene::IndexWriter>(directory, analyzer, true, Lucene::IndexWriter::MaxFieldLengthUNLIMITED);
 
     std::ifstream file(argv[argc - 1]);
+
+    double startTime = getCurrentTime();
     for (std::string line; std::getline(file, line);) {
         std::vector<wchar_t> str(utf8::distance(line.begin(), line.end()));
         // By just looking at this code, you may realise that wchar_t is not the best option possibly.
@@ -46,6 +54,9 @@ int main(int argc, char *argv[]) {
 
     // Close the index again.
     writer->optimize();
+    double endTime = getCurrentTime();
+    std::cout << "Took " << (endTime - startTime) << "s to build an index." << std::endl;
+
     writer->close();
     writer.reset();
 }
