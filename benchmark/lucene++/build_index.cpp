@@ -35,9 +35,14 @@ int main(int argc, char *argv[]) {
     auto writer = Lucene::newLucene<Lucene::IndexWriter>(directory, analyzer, true, Lucene::IndexWriter::MaxFieldLengthUNLIMITED);
 
     std::ifstream file(argv[argc - 1]);
+    std::vector<std::string> strings;
+    for (std::string line; std::getline(file, line);) {
+        strings.push_back(line);
+    }
+    file.close();
 
     double startTime = getCurrentTime();
-    for (std::string line; std::getline(file, line);) {
+    for (const std::string &line : strings) {
         std::vector<wchar_t> str(utf8::distance(line.begin(), line.end()));
         // By just looking at this code, you may realise that wchar_t is not the best option possibly.
 #if SIZEOF_WCHAR_T == 2
