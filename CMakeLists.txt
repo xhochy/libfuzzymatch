@@ -19,4 +19,5 @@ if(LIBCPP_FOUND AND APPLE)
 endif()
 
 add_subdirectory(src)
+add_subdirectory(benchmark)
 
