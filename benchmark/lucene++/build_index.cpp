@@ -15,13 +15,9 @@
 #include <lucene++/SimpleAnalyzer.h>
 
 #include "../../src/utf8/utf8.h"
+#include "../common/timing.h"
 #include "config.h"
 
-double getCurrentTime() {
-    struct timeval timstr;
-    gettimeofday(&timstr, NULL);
-    return timstr.tv_sec + (timstr.tv_usec / 1000000.0);
-}
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
