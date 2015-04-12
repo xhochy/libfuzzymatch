@@ -16,6 +16,7 @@
 #include <lucene++/TopScoreDocCollector.h>
 
 #include "../../src/utf8/utf8.h"
+#include "../common/timing.h"
 #include "config.h"
 
 std::wstring towstring(const std::string &str) {

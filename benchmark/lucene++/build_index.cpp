@@ -12,7 +12,7 @@
 #include <lucene++/Field.h>
 #include <lucene++/FSDirectory.h>
 #include <lucene++/IndexWriter.h>
-#include <lucene++/SimpleAnalyzer.h>
+#include <lucene++/KeywordAnalyzer.h>
 
 #include "../../src/utf8/utf8.h"
 #include "../common/timing.h"
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Initialise classes for index creation.
-    auto analyzer = Lucene::newLucene<Lucene::SimpleAnalyzer>();
+    auto analyzer = Lucene::newLucene<Lucene::KeywordAnalyzer>();
     auto directory = Lucene::FSDirectory::open(L"index.lucene");
     auto writer = Lucene::newLucene<Lucene::IndexWriter>(directory, analyzer, true, Lucene::IndexWriter::MaxFieldLengthUNLIMITED);
 
