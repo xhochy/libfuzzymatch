@@ -41,13 +41,22 @@ int main(int argc, char *argv[]) {
     auto reader = Lucene::IndexReader::open(directory);
     auto searcher = Lucene::newLucene<Lucene::IndexSearcher>(reader);
 
+    std::vector<std::string> queries;
     std::ifstream file(argv[argc - 1]);
     for (std::string line; std::getline(file, line);) {
-        std::wstring queryString = towstring(line);
+        queries.push_back(line);
+    }
+    file.close();
+
+    double startTime = getCurrentTime();
+    for (const std::string &_query: queries) {
+        std::wstring queryString = towstring(_query);
         auto term = Lucene::newLucene<Lucene::Term>(L"text", queryString);
         auto query = Lucene::newLucene<Lucene::FuzzyQuery>(term);
         auto collector = Lucene::TopScoreDocCollector::create(20, true);
         searcher->search(query, collector);
         Lucene::Collection<Lucene::ScoreDocPtr> hits = collector->topDocs()->scoreDocs;
     }
+    double endTime = getCurrentTime();
+    std::cout << "Took " << (endTime - startTime) << "s to execute the queries." << std::endl;
 }
