@@ -2,6 +2,12 @@ project(libfuzzymatch)
 cmake_minimum_required( VERSION 2.8.6 )
 #set( CMAKE_MODULE_PATH  "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules" )
 
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING
+        "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel."
+        FORCE)
+endif(NOT CMAKE_BUILD_TYPE)
+
 include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag( "-std=c++11" CXX11_FOUND )
 check_cxx_compiler_flag( "-std=c++0x" CXX0X_FOUND )
