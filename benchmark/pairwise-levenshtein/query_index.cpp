@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <queue>
+#include <tuple>
 #include <vector>
 
 #include <libfuzzymatch/levenshtein.h>
@@ -33,9 +35,13 @@ int main(int argc, char *argv[]) {
     for (const std::string &_query: queries) {
         std::vector<uint32_t> query;
         utf8to32(_query.data(), query);
-        for (const std::vector<uint32_t> &indexed: index) {
-            uint32_t distance = levenshtein(query, indexed);
-            // TODO: Add to Top20 PQ
+        std::priority_queue<std::tuple<uint32_t, size_t>> pq;
+        for (size_t idx = 0; idx < index.size(); idx++) {
+            uint32_t distance = levenshtein(query, index[idx]);
+            pq.push(std::tuple<uint32_t, size_t>(distance, idx));
+            if (pq.size() > 20) {
+                pq.pop();
+            }
         }
     }
     double endTime = getCurrentTime();
