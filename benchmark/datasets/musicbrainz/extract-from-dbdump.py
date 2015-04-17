@@ -17,4 +17,4 @@ input_file = sys.argv[1]
 output_file = sys.argv[2]
 
 df = pd.read_csv(input_file, sep='\t', header=None)
-df.ix[:, 2].to_csv(outfile, index=False)
+df.ix[:, 2].to_csv(output_file, index=False)
