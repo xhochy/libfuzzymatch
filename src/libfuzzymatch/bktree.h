@@ -2,7 +2,7 @@
 #ifndef BKTREE_H
 #define BKTREE_H
 
-#include <iostream>
+#include <cassert>
 #include <cstdint>
 #include <cstdlib>
 #include <functional>
@@ -20,7 +20,7 @@ public:
     }
 
     void insert(const std::vector<input_type> &input) {
-        // TODO: assert m_next_free < m_tree.size()
+        assert(m_next_free < m_tree.size());
         if (m_next_free == 0) {
             m_tree[0].first = input;
             m_next_free++;
