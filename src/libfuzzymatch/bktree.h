@@ -15,9 +15,7 @@ public:
     using score_func_type = std::function<score_type(const std::vector<input_type> &, const std::vector<input_type> &)>;
 
     BKTree(size_t n, score_func_type score_func) :
-        m_tree(n), m_score_func(score_func)
-    {
-    }
+        m_tree(n), m_score_func(score_func) { }
 
     void insert(const std::vector<input_type> &input) {
         assert(m_next_free < m_tree.size());
