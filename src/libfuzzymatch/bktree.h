@@ -20,9 +20,6 @@ public:
     }
 
     void insert(const std::vector<input_type> &input) {
-        if (m_next_free % 1000 == 0) {
-            std::cout << m_next_free << " ( " << (m_next_free / 879916.0) << "%)" << std::endl;
-        }
         // TODO: assert m_next_free < m_tree.size()
         if (m_next_free == 0) {
             m_tree[0].first = input;
