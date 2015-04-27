@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cstdint>
 #include <iostream>
 
@@ -17,5 +18,12 @@ int main(int argc, char** argv) {
 	utf8to32(argv[1], s2);
 	utf8to32(argv[2], t2);
 
-	std::cout << "Levenshtein distance is " << levenshtein(s2, t2) << std::endl;
+	const uint32_t threshold(3);
+
+	uint32_t dist(levenshtein(s2, t2));
+	uint32_t threshDist(levenshteinLimit(s2, t2, threshold));
+
+	std::cout << "Levenshtein distance is " << dist << " = " << threshDist << std::endl;
+
+	assert(threshDist == (uint32_t)(-1) && (dist > threshold) || dist == threshDist);
 }

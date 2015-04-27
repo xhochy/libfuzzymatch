@@ -22,3 +22,5 @@ uint32_t levenshtein(const std::vector<uint32_t> &, const std::vector<uint32_t> 
  * @return The levenshtein distance between the two inputs.
  */
 uint32_t levenshteinStatic(const std::vector<uint32_t> &s, const std::vector<uint32_t> &t);
+
+uint32_t levenshteinLimit(const std::vector<uint32_t> &, const std::vector<uint32_t> &, const uint32_t);
