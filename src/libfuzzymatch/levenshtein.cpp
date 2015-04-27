@@ -41,8 +41,5 @@ uint32_t levenshteinStatic(const std::vector<uint32_t> &s, const std::vector<uin
         last.resize(m + 1);
     }
 
-    // Initialise only the first (m + 1) entries of current with 0
-    std::fill_n(current.begin(), m + 1, 0);
-
     return levenshteinCore(s, t, current, last);
 }
