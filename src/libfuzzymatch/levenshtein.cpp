@@ -26,7 +26,7 @@ uint32_t levenshteinCore(const std::vector<uint32_t> &s, const std::vector<uint3
  */
 uint32_t levenshtein(const std::vector<uint32_t> &s, const std::vector<uint32_t> &t) {
 	const size_t n(s.size()), m(t.size());
-	std::vector<uint32_t> current(m + 1, 0), last(m + 1);
+	std::vector<uint32_t> current(m + 1), last(m + 1);
     return levenshteinCore(s, t, current, last);
 }
 
