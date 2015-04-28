@@ -77,14 +77,25 @@ uint32_t levenshteinLimitCore(const std::vector<uint32_t> &s, const std::vector<
  */
 uint32_t levenshteinLimit(const std::vector<uint32_t> &s, const std::vector<uint32_t> &t, const uint32_t threshold) {
     const size_t n(s.size()), m(t.size());
+
+    // If the difference in word length exceeds the threshold, don't even bother
+    if ((m < n && n-m > threshold) || (m > n && m-n > threshold)) {
+        return -1;
+    }
+
     std::vector<uint32_t> current(m + 1), last(m + 1);
     return levenshteinLimitCore(s, t, current, last, threshold);
 }
 
 uint32_t levenshteinLimitStatic(const std::vector<uint32_t> &s, const std::vector<uint32_t> &t, const uint32_t threshold) {
-    const size_t m(t.size());
+    const size_t n(s.size()), m(t.size());
     static std::vector<uint32_t> current;
     static std::vector<uint32_t> last;
+
+    // If the difference in word length exceeds the threshold, don't even bother
+    if ((m < n && n-m > threshold) || (m > n && m-n > threshold)) {
+        return -1;
+    }
 
     if (current.size() < m + 1) {
         // Also: last.size < m + 1
