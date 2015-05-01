@@ -13,8 +13,8 @@ uint32_t levenshteinCore(const std::vector<uint32_t> &s, const std::vector<uint3
     for (size_t i = 0; i < n; ++i) {
         current[0] = i+1; // = last[0]+1, corresponds to unmatched character in s
         for (size_t j  = 1; j <= m; ++j) {
-            current[j] = std::min(last[j], current[j-1]) + 1; // insertion / deletion
-            current[j] = std::min(current[j], last[j-1] + (int)(s[i] != t[j-1])); // modification
+            uint32_t cur = std::min(last[j], current[j-1]) + 1; // insertion / deletion
+            current[j] = std::min(cur, last[j-1] + (uint32_t)(s[i] != t[j-1])); // modification
         }
         current.swap(last);
     }
