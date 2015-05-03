@@ -9,6 +9,7 @@
 #include <libfuzzymatch/util.h>
 
 #include "../common/pairwise.h"
+#include "../common/plain_index.h"
 #include "../common/timer.h"
 
 int main(int argc, char *argv[]) {
@@ -25,13 +26,7 @@ int main(int argc, char *argv[]) {
     file.close();
 
     std::vector<std::vector<uint32_t>> index;
-    std::ifstream indexFile(argv[argc - 2]);
-    for (std::string line; std::getline(indexFile, line);) {
-        std::vector<uint32_t> indexed;
-        utf8to32(line.data(), indexed);
-        index.push_back(indexed);
-    }
-    file.close();
+    loadIndex(argv[argc - 2], index);
 
     Timer timer;
 
