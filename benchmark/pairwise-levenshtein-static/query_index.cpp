@@ -35,6 +35,6 @@ int main(int argc, char *argv[]) {
 
     Timer timer;
 
-    benchLevenshtein(queries, index, levenshtein);
+    benchLevenshtein(queries, index, levenshteinStatic);
     std::cout << "Took " << timer.getAndReset() << "s to execute the queries." << std::endl;
 }
