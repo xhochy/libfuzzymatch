@@ -6,7 +6,7 @@
 #include <libfuzzymatch/levenshtein.h>
 #include <libfuzzymatch/util.h>
 
-#include "../common/timing.h"
+#include "../common/timer.h"
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -21,15 +21,14 @@ int main(int argc, char *argv[]) {
     }
     file.close();
 
-    double startTime = getCurrentTime();
+    Timer timer;
     BKTree<uint32_t, uint32_t> tree(strings.size(), levenshteinStatic);
     for (const std::string &str : strings) {
         std::vector<uint32_t> data;
         utf8to32(str.c_str(), data);
         tree.insert(data);
     }
-    double endTime = getCurrentTime();
-    std::cout << "Took " << (endTime - startTime) << "s to build an index." << std::endl;
+    std::cout << "Took " << timer.get() << "s to build an index." << std::endl;
 
     std::ofstream index("index.bktree");
     // TODO

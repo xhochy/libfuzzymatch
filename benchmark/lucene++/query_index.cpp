@@ -16,7 +16,7 @@
 #include <lucene++/TopScoreDocCollector.h>
 
 #include "../../src/utf8/utf8.h"
-#include "../common/timing.h"
+#include "../common/timer.h"
 #include "config.h"
 
 std::wstring towstring(const std::string &str) {
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     }
     file.close();
 
-    double startTime = getCurrentTime();
+    Timer timer;
     for (const std::string &_query: queries) {
         std::wstring queryString = towstring(_query);
         auto term = Lucene::newLucene<Lucene::Term>(L"text", queryString);
@@ -58,6 +58,5 @@ int main(int argc, char *argv[]) {
         searcher->search(query, collector);
         Lucene::Collection<Lucene::ScoreDocPtr> hits = collector->topDocs()->scoreDocs;
     }
-    double endTime = getCurrentTime();
-    std::cout << "Took " << (endTime - startTime) << "s to execute the queries." << std::endl;
+    std::cout << "Took " << timer.get() << "s to execute the queries." << std::endl;
 }

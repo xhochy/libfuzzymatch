@@ -15,7 +15,7 @@
 #include <lucene++/KeywordAnalyzer.h>
 
 #include "../../src/utf8/utf8.h"
-#include "../common/timing.h"
+#include "../common/timer.h"
 #include "config.h"
 
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
     }
     file.close();
 
-    double startTime = getCurrentTime();
+    Timer timer;
     for (const std::string &line : strings) {
         std::vector<wchar_t> str(utf8::distance(line.begin(), line.end()));
         // By just looking at this code, you may realise that wchar_t is not the best option possibly.
@@ -55,8 +55,7 @@ int main(int argc, char *argv[]) {
 
     // Close the index again.
     writer->optimize();
-    double endTime = getCurrentTime();
-    std::cout << "Took " << (endTime - startTime) << "s to build an index." << std::endl;
+    std::cout << "Took " << timer.get() << "s to build an index." << std::endl;
 
     writer->close();
     writer.reset();

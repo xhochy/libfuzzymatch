@@ -8,7 +8,7 @@
 #include <libfuzzymatch/levenshtein.h>
 #include <libfuzzymatch/util.h>
 
-#include "../common/timing.h"
+#include "../common/timer.h"
 
 void benchLevenshtein(std::vector<std::string> queries,
                       std::vector<std::vector<uint32_t>> index,
@@ -57,13 +57,11 @@ int main(int argc, char *argv[]) {
     }
     file.close();
 
-    double startTime = getCurrentTime();
-    benchLevenshtein(queries, index, levenshtein);
-    double endTime = getCurrentTime();
-    std::cout << "Took " << (endTime - startTime) << "s to execute the queries." << std::endl;
+    Timer timer;
 
-    startTime = getCurrentTime();
+    benchLevenshtein(queries, index, levenshtein);
+    std::cout << "Took " << timer.getAndReset() << "s to execute the queries." << std::endl;
+
     benchLevenshtein(queries, index, levenshteinStatic);
-    endTime = getCurrentTime();
-    std::cout << "Took " << (endTime - startTime) << "s to execute the queries (static allocated buffers)." << std::endl;
+    std::cout << "Took " << timer.getAndReset() << "s to execute the queries (static allocated buffers)." << std::endl;
 }
