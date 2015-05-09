@@ -63,17 +63,20 @@ uint32_t levenshteinLimit(const std::vector<uint32_t> &s, const std::vector<uint
     const size_t n(s.size()), m(t.size());
 
     // If the difference in word length exceeds the threshold, don't even bother
-    if (abs(n-m) > threshold) {
+    if (abs((int)n-(int)m) > threshold) {
         return -1;
     }
 
-    std::vector<uint32_t> current(m + 1), last(m + 1);
     switch(threshold) {
         case 1:  return levenshteinLimit1(s, t);
         //case 2:  return levenshteinLimit2(s, t);
         //case 3:  return levenshteinLimit3(s, t);
-        default: return levenshteinLimitCore(s, t, current, last, threshold);
+        default: break; // continued below
     }
+
+    // default case
+    std::vector<uint32_t> current(m + 1), last(m + 1);
+    return levenshteinLimitCore(s, t, current, last, threshold);
 }
 
 uint32_t levenshteinLimitStatic(const std::vector<uint32_t> &s, const std::vector<uint32_t> &t, const uint32_t threshold) {
@@ -82,10 +85,16 @@ uint32_t levenshteinLimitStatic(const std::vector<uint32_t> &s, const std::vecto
     static std::vector<uint32_t> last;
 
     // If the difference in word length exceeds the threshold, don't even bother
-    if ((m < n && n-m > threshold) || (m > n && m-n > threshold)) {
+    if (abs((int)n - (int)m) > threshold) {
         return -1;
     }
 
+    switch(threshold) {
+        case 1: return levenshteinLimit1(s, t);
+        default: break; // continued below
+    }
+
+    // default case
     if (current.size() < m + 1) {
         // Also: last.size < m + 1
         current.resize(m + 1);
