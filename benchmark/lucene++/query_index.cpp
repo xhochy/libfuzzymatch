@@ -58,5 +58,8 @@ int main(int argc, char *argv[]) {
         searcher->search(query, collector);
         Lucene::Collection<Lucene::ScoreDocPtr> hits = collector->topDocs()->scoreDocs;
     }
-    std::cout << "Took " << timer.get() << "s to execute the queries." << std::endl;
+
+    double t = timer.get();
+    std::cout << "Took " << t << "s to execute the queries." << std::endl;
+    std::cout << "RESULT algo=lucene++ threshold=-1 index=" << argv[1] << " queries=" << argv[2] << " time=" << t << std::endl;
 }
