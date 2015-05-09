@@ -4,6 +4,7 @@
 
 #include "levenshteinLimit.h"
 
+// Optimized version for threshold=1
 uint32_t levenshteinLimit1(const std::vector<uint32_t> &s, const std::vector<uint32_t> &t) {
     const uint32_t n((uint32_t)s.size());
     assert(abs((int)n - (int)t.size()) <= 1);
