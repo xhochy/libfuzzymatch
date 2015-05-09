@@ -1,3 +1,5 @@
+#include "plain_index.h"
+
 #include <iostream>
 #include <fstream>
 
@@ -28,4 +30,17 @@ void loadIndex(const char *indexFilename, std::vector<std::vector<uint32_t>> &in
         index.push_back(indexed);
     }
     indexFile.close();
+}
+
+
+void PlainIndex::load(const char* fn) {
+    loadIndex(fn, index);
+}
+
+size_t PlainIndex::size() const {
+    return index.size();
+}
+
+const std::vector<uint32_t> &PlainIndex::get(const size_t idx) const {
+    return index[idx];
 }

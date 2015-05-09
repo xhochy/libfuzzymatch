@@ -1,3 +1,5 @@
+include_directories("${CMAKE_SOURCE_DIR}/src")
+
 add_subdirectory(common)
 
 add_subdirectory(bktree)
@@ -13,4 +15,15 @@ target_link_libraries(build_index
 set_target_properties(build_index
     PROPERTIES
     RUNTIME_OUTPUT_NAME build-index
+    )
+
+# Query the index
+add_executable(query_index query_index.cpp)
+target_link_libraries(query_index
+    fuzzymatch_benchmark_common
+    fuzzymatch
+    )
+set_target_properties(query_index
+    PROPERTIES
+    RUNTIME_OUTPUT_NAME query-index
     )
