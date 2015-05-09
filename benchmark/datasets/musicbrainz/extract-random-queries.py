@@ -6,6 +6,7 @@ Usage:
     ./extract-random-queries.py <infile> <outfile>
 """
 
+import codecs
 import os
 from random import choice, randint, random
 import string
@@ -25,8 +26,8 @@ temp_f, temp_file = mkstemp()
 call(['shuf', '-n', '1000', input_file, '-o', temp_file])
 
 # Modifiy these queries so that they have a non-zero edit distance.
-with open(temp_file, 'r') as f:
-    with open(output_file, 'w') as out:
+with codecs.open(temp_file, 'r', 'utf-8') as f:
+    with codecs.open(output_file, 'w', 'utf-8') as out:
         for line in f.readlines():
             if random() > 0.75:
                 pos = randint(0, len(line) - 2)
