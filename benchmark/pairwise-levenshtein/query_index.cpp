@@ -33,6 +33,5 @@ int main(int argc, char *argv[]) {
     benchLevenshtein(queries, index, levenshtein);
 
     double t = timer.getAndReset();
-    std::cout << "Took " << t << "s to execute the queries." << std::endl;
     std::cout << "RESULT algo=pairwise threshold=-1 index=" << argv[1] << " queries=" << argv[2] << " time=" << t << std::endl;
 }

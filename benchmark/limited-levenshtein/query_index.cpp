@@ -37,6 +37,5 @@ int main(int argc, char *argv[]) {
     });
 
     auto t = timer.get();
-    std::cout << "Took " << t << "s to execute the queries." << std::endl;
     std::cout << "RESULT algo=limit threshold=" << threshold << " index=" << argv[1] << " queries=" << argv[2] << " time=" << t << std::endl;
 }
