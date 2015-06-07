@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
     Timer timer;
 
-    benchLevenshtein(queries, index, levenshteinStatic);
+    benchLevenshtein(queries, index, levenshteinStatic<std::vector<uint32_t>, std::vector<uint32_t>>);
 
     auto t = timer.get();
     std::cout << "RESULT algo=static threshold=-1 index=" << argv[1] << " queries=" << argv[2] << " time=" << t << std::endl;

@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     file.close();
 
     Timer timer;
-    BKTree<uint32_t, uint32_t> tree(strings.size(), levenshteinStatic);
+    BKTree<uint32_t, uint32_t> tree(strings.size(), levenshteinStatic<std::vector<uint32_t>, std::vector<uint32_t>>);
     for (const std::string &str : strings) {
         std::vector<uint32_t> data;
         utf8to32(str.c_str(), data);

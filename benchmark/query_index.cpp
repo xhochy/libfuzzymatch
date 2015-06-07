@@ -56,10 +56,10 @@ Benchmark* createBenchmark(const std::string &algo, const uint32_t threshold) {
     Benchmark *benchmark(nullptr);
     if (algo == "pairwise") {
         std::cout << "Creating pairwise benchmark for plain pairwise Levenshtein" << std::endl;
-        benchmark = new PairwiseBenchmark(levenshtein);
+        benchmark = new PairwiseBenchmark(levenshtein<std::vector<uint32_t>, std::vector<uint32_t>>);
     } else if (algo == "static") {
         std::cout << "Creating pairwise benchmark for pairwise Levenshtein with statically allocated arrays" << std::endl;
-        benchmark = new PairwiseBenchmark(levenshteinStatic);
+        benchmark = new PairwiseBenchmark(levenshteinStatic<std::vector<uint32_t>, std::vector<uint32_t>>);
     } else if (algo == "limit") {
         std::cout << "Creating pairwise benchmark for threshold-limited pairwise Levenshtein (threshold = " << threshold << ")" << std::endl;
         benchmark = new PairwiseBenchmark([=](const std::vector<uint32_t> &s, const std::vector<uint32_t> &t) {

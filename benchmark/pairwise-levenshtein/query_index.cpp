@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
     Timer timer;
 
-    benchLevenshtein(queries, index, levenshtein);
+    benchLevenshtein(queries, index, levenshtein<std::vector<uint32_t>, std::vector<uint32_t>>);
 
     double t = timer.getAndReset();
     std::cout << "RESULT algo=pairwise threshold=-1 index=" << argv[1] << " queries=" << argv[2] << " time=" << t << std::endl;
