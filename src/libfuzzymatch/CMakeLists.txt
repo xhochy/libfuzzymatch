@@ -4,3 +4,5 @@ add_library(fuzzymatch
     )
 
 add_executable(test test.cpp levenshtein.cpp)
+
+install(FILES levenshtein.h DESTINATION include/libfuzzymatch)
