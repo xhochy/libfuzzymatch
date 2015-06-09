@@ -1,0 +1,9 @@
+get_filename_component(LIBFUZZYMATCH_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+if(EXISTS "${LIBFUZZYMATCH_CMAKE_DIR}/CMakeCache.txt")
+    # In build tree
+    include("${LIBFUZZYMATCH_CMAKE_DIR}/LibFuzzyMatchBuildTreeSettings.cmake")
+else()
+    set(LIBFUZZYMATCH_INCLUDE_DIRS "@CMAKE_INSTALL_FULL_INCLUDEDIR@")
+endif()
+include("${LIBFUZZYMATCH_CMAKE_DIR}/LibFuzzyMatchLibraryDepends.cmake")
+set(LIBFUZZYMATCH_FOUND TRUE)

@@ -2,6 +2,8 @@ project(libfuzzymatch)
 cmake_minimum_required( VERSION 2.8.6 )
 #set( CMAKE_MODULE_PATH  "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules" )
 
+include(GNUInstallDirs)
+
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING
         "Choose the type of build, options are: Debug Release RelWithDebInfo MinSizeRel."
@@ -27,3 +29,19 @@ endif()
 add_subdirectory(src)
 add_subdirectory(benchmark)
 
+configure_file(LibFuzzyMatchBuildTreeSettings.cmake.in
+    "${PROJECT_BINARY_DIR}/LibFuzzyMatchBuildTreeSettings.cmake"
+    @ONLY)
+configure_file(LibFuzzyMatchConfig.cmake.in
+    "${PROJECT_BINARY_DIR}/LibFuzzyMatchConfig.cmake"
+    @ONLY)
+configure_file(LibFuzzyMatchConfigVersion.cmake.in
+    "${PROJECT_BINARY_DIR}/LibFuzzyMatchConfigVersion.cmake"
+    @ONLY)
+
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/LibFuzzyMatchConfig.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/LibFuzzyMatchConfigVersion.cmake
+    DESTINATION
+    ${CMAKE_INSTALL_LIBDIR}/cmake/LibFuzzyMatch
+    )
